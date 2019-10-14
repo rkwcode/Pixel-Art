@@ -2,23 +2,23 @@ function makeGrid(height, width) {
     const table = document.getElementById("pixelCanvas");
     let grid = '';
 
-    // loop over each row
+    // loop over each row in the grid
     for (let i = 0; i < height; i++) {
         grid += '<tr class="row-' + i + '">';
         // loop for each cell
-        for (let j = 0; j < width; j++) {
-            grid += '<td class="cell" id="row-' + i + '_cell-' + j + '"></td>';
+        for (let p = 0; p < width; p++) {
+            grid += '<td class="cell" id="row-' + i + '_cell-' + p + '"></td>';
         }
         grid += '</tr>';
     }
-    // add grid into table element
+    // add the grid into table element
     table.innerHTML = grid;
 
-    // Add click event to grid cells once the table grid has been created
+    // add click event to grid cells after the table grid has been created
     addClickEventToCells();
 }
 
-// gets values for height and width from form and uses them to call makrGrid()
+// gets values for height and width from form to call makeGrid()
 function formSubmission() {
     event.preventDefault();
     const height = document.getElementById('inputHeight').value;
@@ -26,22 +26,21 @@ function formSubmission() {
     makeGrid(height, width);
 }
 
-// add click events to all cells
+// add click events to all the cells
 function addClickEventToCells() {
-    // on color selection return color:
-    const colorPicker = document.getElementById("colorPicker");
+    const colorSelector = document.getElementById("colorSelector");
     const cells = document.getElementsByClassName('cell');
     for (let i = 0; i < cells.length; i++) {
         cells[i].addEventListener("click", function (event) {
             let clickedCell = event.target;
-            clickedCell.style.backgroundColor = colorPicker.value;
+            clickedCell.style.backgroundColor = colorSelector.value;
         });
     }
 }
 
 
-// on submit of form #sizePicker:
-document.getElementById('sizePicker').onsubmit = function () {
+// when form is submitted #sizeSelector:
+document.getElementById('sizeSelector').onsubmit = function () {
     formSubmission();
 };
 
